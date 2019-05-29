@@ -17,4 +17,5 @@ Edge::Edge(GraphNode* dest, int weight) {
 
 Edge::~Edge()
 {
+
 }
