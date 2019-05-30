@@ -3,7 +3,7 @@ class GraphNode
 {
 public:
 	int key;
-	int status; // 0 - neobradjen, 1 - obradjen
+	int status; // 0 - neobradjen, 1 - obradjen, 2 - smesten u pomocnu strukturu
 	GraphNode* next; // sledeci u listi, a ne sledeci s kojim je povezan
 	class Edge* edges; // izlazni potezi
 public:
