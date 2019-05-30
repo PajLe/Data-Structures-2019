@@ -123,6 +123,7 @@
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="GraphAsList.cpp" />
     <ClCompile Include="GraphNode.cpp" />
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

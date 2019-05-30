@@ -12,6 +12,7 @@ public:
 	bool insertEdge(int startNode, int endNode);
 	bool deleteNode(int key);
 	bool deleteEdge(int startNode, int endNode);
+	void print();
 private:
 	void deleteEdge(GraphNode* sourceNode, Edge* prev, Edge* current);
 	void deleteExitingEdges(GraphNode* source);

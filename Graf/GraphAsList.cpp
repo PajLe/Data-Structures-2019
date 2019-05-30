@@ -1,7 +1,7 @@
 #include "GraphAsList.h"
 #include "GraphNode.h"
 #include "Edge.h"
-
+#include <iostream>
 
 
 GraphAsList::GraphAsList()
@@ -12,6 +12,14 @@ GraphAsList::GraphAsList()
 
 GraphAsList::~GraphAsList()
 {
+	GraphNode* temp = start;
+	while (temp) {
+		deleteExitingEdges(temp);
+		GraphNode* toDel = temp;
+		temp = temp->next;
+		delete toDel;
+	}
+	start = nullptr;
 }
 
 GraphNode* GraphAsList::findNode(int key) {
@@ -149,4 +157,18 @@ bool GraphAsList::deleteEdge(int startNode, int endNode) {
 	}
 
 	return false;
+}
+
+void GraphAsList::print() {
+	GraphNode* ptr = start;
+	while (ptr) {
+		std::cout << ptr->key << " -> ";
+		Edge* tmpEdge = ptr->edges;
+		while (tmpEdge) {
+			std::cout << tmpEdge->dest->key << "|";
+			tmpEdge = tmpEdge->peer;
+		}
+		std::cout << "\r\n";
+		ptr = ptr->next;
+	}
 }
