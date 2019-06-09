@@ -37,7 +37,7 @@ int main() {
 
 	delete a;*/
 
-	GraphAsList* avio = new GraphAsList();
+	/*GraphAsList* avio = new GraphAsList();
 	avio->insertNode(1, 50);
 	avio->insertNode(2, 20);
 	avio->insertNode(3, 30);
@@ -86,5 +86,25 @@ int main() {
 		std::cout << a->at(i)->key << " ";
 	}
 	delete a;
-	delete avio;
+	delete avio;*/
+
+	GraphAsList* b = new GraphAsList();
+	b->insertNode(1);
+	b->insertNode(2);
+	b->insertNode(3);
+	b->insertNode(4);
+	b->insertNode(5);
+	b->insertNode(6);
+	b->insertNode(7);
+	b->insertNode(8);
+	b->insertNode(9);
+	b->insertNode(10);
+	b->insertNode(11);
+
+	b->insertEdge(5, 6);
+	b->insertEdge(6, 8);
+	b->insertEdge(8, 1);
+	b->insertEdge(1, 8);
+	b->dobiliLoptu();
+	delete b;
 }

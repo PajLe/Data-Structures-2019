@@ -232,3 +232,43 @@ void GraphAsList::reachable(GraphNode* node, int time, std::vector<GraphNode*>& 
 	}
 
 }
+
+void GraphAsList::dobiliLoptu() {
+	if (!start) return;
+	GraphNode* temp = start;
+	while (temp) {
+		temp->status = 0;
+		temp = temp->next;
+	}
+	temp = start;
+	while (temp) {
+		if (temp->status == 0 && temp->edges) {
+			temp->visit();
+			temp->status = 1;
+		}
+		dfs(temp);
+		temp = temp->next;
+	}
+
+}
+
+void GraphAsList::dfs(GraphNode* node) {
+	if (!node) return;
+
+	Edge* e = node->edges;
+
+	while (e) {
+		
+		if (e->dest->status == 0) {
+			e->dest->visit();
+			e->dest->status = 1;
+		}
+		int prevStatus = e->dest->status;
+		if (e->dest->status < 2) {
+			e->dest->status = 2;
+			dfs(e->dest);
+		}
+		e->dest->status = prevStatus;
+		e = e->peer;
+	}
+}
