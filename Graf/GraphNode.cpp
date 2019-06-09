@@ -4,6 +4,15 @@
 
 GraphNode::GraphNode(int key) {
 	this->key = key;
+	vremePresedanja = 0;
+	status = 0;
+	next = nullptr;
+	edges = nullptr;
+}
+
+GraphNode::GraphNode(int key, int vremePresedanja) {
+	this->key = key;
+	this->vremePresedanja = vremePresedanja;
 	status = 0;
 	next = nullptr;
 	edges = nullptr;

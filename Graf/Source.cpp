@@ -1,8 +1,9 @@
 #include "GraphAsList.h"
+#include "GraphNode.h"
 #include <iostream>
 
 int main() {
-	GraphAsList* a = new GraphAsList();
+	/*GraphAsList* a = new GraphAsList();
 	a->insertNode(4);
 	a->insertNode(3);
 	a->insertNode(2);
@@ -34,6 +35,56 @@ int main() {
 	a->print();
 
 
+	delete a;*/
+
+	GraphAsList* avio = new GraphAsList();
+	avio->insertNode(1, 50);
+	avio->insertNode(2, 20);
+	avio->insertNode(3, 30);
+	avio->insertNode(4, 11);
+	avio->insertNode(5, 15);
+	avio->insertNode(6, 40);
+	avio->insertNode(7, 100);
+	avio->insertNode(8, 111);
+
+
+	avio->insertEdge(1, 2, 142);
+	avio->insertEdge(2, 1, 142);
+
+	avio->insertEdge(1, 5, 849);
+	avio->insertEdge(5, 1, 849);
+
+	avio->insertEdge(2, 3, 1099);
+	avio->insertEdge(3, 2, 1099);
+
+	avio->insertEdge(2, 4, 1387);
+	avio->insertEdge(4, 2, 1387);
+
+	avio->insertEdge(3, 4, 1120);
+	avio->insertEdge(4, 3, 1120);
+
+	avio->insertEdge(4, 5, 802);
+	avio->insertEdge(5, 4, 802);
+
+	avio->insertEdge(4, 7, 1233);
+	avio->insertEdge(7, 4, 1233);
+
+	avio->insertEdge(5, 7, 1743);
+	avio->insertEdge(7, 5, 1743);
+
+	avio->insertEdge(5, 6, 1843);
+	avio->insertEdge(6, 5, 1843);
+
+	avio->insertEdge(6, 7, 337);
+	avio->insertEdge(7, 6, 337);
+
+	avio->insertEdge(8, 7, 2555);
+	avio->insertEdge(7, 8, 2555);
+
+	std::vector<GraphNode*>* a = avio->getReachable(1, 1302);
+	for (int i = 0; i < a->capacity(); i++) {
+		std::cout << a->at(i)->key << " ";
+	}
 	delete a;
-	return 0;
+	delete avio;
 }

@@ -55,6 +55,16 @@ bool GraphAsList::insertNode(int key) {
 	return true;
 }
 
+//operacija dodavanja cvora O(n) 
+bool GraphAsList::insertNode(int key, int vremePresedanja) {
+	if (findNode(key)) return false; // cvor sa ovim kljucem vec postoji
+	GraphNode* newNode = new GraphNode(key, vremePresedanja);
+	newNode->next = start;
+	start = newNode;
+	nodeNum++;
+	return true;
+}
+
 bool GraphAsList::insertEdge(int startNode, int endNode) {
 	GraphNode* tempStart = findNode(startNode);
 	if (!tempStart) return false;
@@ -62,6 +72,18 @@ bool GraphAsList::insertEdge(int startNode, int endNode) {
 	if (!tempEnd) return false;
 
 	Edge* newEdge = new Edge(tempEnd);
+	newEdge->peer = tempStart->edges;
+	tempStart->edges = newEdge;
+	return true;
+}
+
+bool GraphAsList::insertEdge(int startNode, int endNode, int weight) {
+	GraphNode* tempStart = findNode(startNode);
+	if (!tempStart) return false;
+	GraphNode* tempEnd = findNode(endNode);
+	if (!tempEnd) return false;
+
+	Edge* newEdge = new Edge(tempEnd, weight);
 	newEdge->peer = tempStart->edges;
 	tempStart->edges = newEdge;
 	return true;
@@ -171,4 +193,42 @@ void GraphAsList::print() {
 		std::cout << "\r\n";
 		ptr = ptr->next;
 	}
+}
+
+std::vector<GraphNode*>* GraphAsList::getReachable(int idAerodroma, int time) {
+	std::vector<GraphNode*>* list = new std::vector<GraphNode*>();
+	GraphNode* temp = start;
+	while (temp) {
+		temp->status = 0;
+		temp = temp->next;
+	}
+
+	GraphNode* aero = findNode(idAerodroma);
+	if (aero) aero->status = 2;
+	else return list;
+	reachable(aero, time, *list);
+
+	return list;
+}
+
+void GraphAsList::reachable(GraphNode* node, int time, std::vector<GraphNode*>& list) {
+	if (time < 0) return;
+	
+	Edge* e = node->edges;
+	
+	while (e) {
+		if (e->dest->status == 0 && e->weight <= time) {
+			list.push_back(e->dest);
+			e->dest->status = 1; // status = 1 znaci da je cvor ubacen u listu;  u sledecem nivou rekurzije ne treba da se ubacuje ponovo
+		}
+		int prevStatus = e->dest->status; // pamtimo status cvora u trenutnoj dubini rekurzije
+		if (e->dest->status < 2 && e->weight < time) { // ako cvor ima status = 2 ili se ne moze doci do njega (ili se moze doci do njega, ali se ne moze dalje ici), ne treba ga dalje "obilaziti"
+			e->dest->status = 2; // ako smo obisli cvor, postavljamo status = 2 kako ga ne bismo ponovo obilazili u sledecem nivou rekurzije
+			reachable(e->dest, time - e->weight - e->dest->vremePresedanja, list);
+		}	
+
+		e->dest->status = prevStatus;
+		e = e->peer;
+	}
+
 }

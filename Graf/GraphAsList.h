@@ -1,4 +1,7 @@
 #pragma once
+#include <iostream>
+#include <vector>
+
 class GraphAsList
 {
 	class GraphNode* start;
@@ -13,8 +16,15 @@ public:
 	bool deleteNode(int key);
 	bool deleteEdge(int startNode, int endNode);
 	void print();
+
+	bool insertNode(int key, int vremePresedanja);
+	bool insertEdge(int startNode, int endNode, int weight);
+
+	std::vector<GraphNode*>* getReachable(int idAerodroma, int time); // SP_Kol_II_2016 zad: 3b
 private:
 	void deleteEdge(GraphNode* sourceNode, Edge* prev, Edge* current);
 	void deleteExitingEdges(GraphNode* source);
+
+	void reachable(GraphNode* node, int time, std::vector<GraphNode*>& list);
 };
 
