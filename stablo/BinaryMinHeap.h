@@ -27,6 +27,8 @@ public:
 	}
 	void printHeap(); // implementacija za heap moze i bez pomocnih struktura
 
+	// zadaci sa kolokvijuma:
+
 	void update(int val, int add); // SP_Kol_II_2016 zad: 1b
 
 private:

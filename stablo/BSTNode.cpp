@@ -15,5 +15,5 @@ BSTNode::~BSTNode()
 }
 
 void BSTNode::visit() {
-	std::cout << key << " " << std::endl;
+	std::cout << key << " ";
 }

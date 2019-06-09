@@ -1,6 +1,6 @@
 #include "BSTree.h"
 #include "BSTNode.h"
-
+#include <math.h>
 
 BSTree::BSTree()
 {
@@ -50,4 +50,34 @@ void BSTree::preorder(BSTNode* node) {
 		preorder(node->left);
 		preorder(node->right);
 	}
+}
+
+
+bool BSTree::balanced() {
+	int height = 0;
+	if (balanced(root, &height)) return true;
+	return false;
+}
+
+bool BSTree::balanced(BSTNode* node, int* height) {
+	if (!node)
+	{
+		*height = 0;
+		return true;
+	}
+	int lh = 0, rh = 0;
+	bool l, r;
+	l = balanced(node->left, &lh);
+	r = balanced(node->right, &rh);
+	*height = (lh > rh ? lh : rh) + 1;
+	if (abs(lh - rh) >= 2)
+		return false;
+	else return l && r;
+}
+
+int BSTree::nodeHeight(BSTNode* node) { // vraca visinu cvora node u odnosu na najveci nivo podstabla ciji je koren node; konvencija: cvor u najvecem nivou je na visini 1
+	if (!node) return 0;
+	int left = nodeHeight(node->left) + 1;
+	int right = nodeHeight(node->right) + 1;
+	return (right > left) ? right : left;
 }
