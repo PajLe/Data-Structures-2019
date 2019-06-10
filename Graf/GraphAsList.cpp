@@ -330,3 +330,32 @@ int GraphAsList::findNumReachable(GraphNode* node) {
 	}
 	return toReturn;
 }
+
+int GraphAsList::calcPrevious(int subjects[], int n) {
+	GraphNode* temp = start;
+	while (temp) {
+		temp->status = 0;
+		temp = temp->next;
+	}
+
+	int brp = 0;
+	for (int i = 0; i < n; i++) {
+		brp += brojPreduslova(findNode(subjects[i]));
+	}
+	return brp;
+}
+
+int GraphAsList::brojPreduslova(GraphNode* predmet) {
+	if (!predmet) return 0;
+	int toRet = 0;
+	Edge* e = predmet->edges;
+	while (e) {
+		if (e->dest->status == 0) {
+			toRet++;
+			e->dest->status = 1;
+			toRet += brojPreduslova(e->dest);
+		}
+		e = e->peer;
+	}
+	return toRet;
+}

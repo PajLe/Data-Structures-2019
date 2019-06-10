@@ -88,7 +88,7 @@ int main() {
 	delete a;
 	delete avio;*/
 
-	GraphAsList* b = new GraphAsList();
+	/*GraphAsList* b = new GraphAsList();
 	b->insertNode(1);
 	b->insertNode(2);
 	b->insertNode(3);
@@ -108,5 +108,35 @@ int main() {
 	b->dobiliLoptu();
 	std::cout << std::endl;
 	std::cout << b->findMaxReachable()->key << std::endl;
-	delete b;
+	delete b;*/
+	
+	GraphAsList* c = new GraphAsList();
+	c->insertNode(1);
+	c->insertNode(2);
+	c->insertNode(3);
+	c->insertNode(4);
+	c->insertNode(5);
+	c->insertNode(6);
+	c->insertNode(7);
+	c->insertNode(8);
+	c->insertNode(9);
+	c->insertNode(10);
+
+	c->insertEdge(1, 2);
+	c->insertEdge(1, 3);
+	c->insertEdge(1, 4);
+	c->insertEdge(2,5);
+	c->insertEdge(2, 6);
+	c->insertEdge(5, 7);
+	c->insertEdge(7, 10);
+	c->insertEdge(6, 7);
+	c->insertEdge(6, 10);
+	c->insertEdge(6, 8);
+	c->insertEdge(4, 9);
+
+	int predmeti[] = { 6,8,4,2 };
+	int predmeti2[] = { 1 };
+	std::cout << c->calcPrevious(predmeti, 4) << std::endl;
+	std::cout << c->calcPrevious(predmeti2, 1) << std::endl;
+	delete c;
 }
