@@ -106,5 +106,7 @@ int main() {
 	b->insertEdge(8, 1);
 	b->insertEdge(1, 8);
 	b->dobiliLoptu();
+	std::cout << std::endl;
+	std::cout << b->findMaxReachable()->key << std::endl;
 	delete b;
 }

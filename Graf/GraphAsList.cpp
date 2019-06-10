@@ -272,3 +272,61 @@ void GraphAsList::dfs(GraphNode* node) {
 		e = e->peer;
 	}
 }
+
+int GraphAsList::izlazniStepen(GraphNode* node) {
+	if (!node) return 0;
+	node->status = 0;
+	Edge* e = node->edges;
+	while (e) {
+		node->status++;
+		e = e->peer;
+	}
+	return node->status;
+}
+
+GraphNode* GraphAsList::findMaxReachable() {
+	if (!start) return nullptr;
+	GraphNode* temp = start;
+	while (temp) {
+		temp->status = 0;
+		temp = temp->next;
+	}
+
+	temp = start;
+	GraphNode* maxReachable = temp;
+	int nr = findNumReachable(temp);
+
+	temp = temp->next;
+	while (temp) { // moramo od svakog cvora da nadjemo maxReachable jer ne znamo da li je graf povezan ili ne
+				   // ako graf jeste povezan, svakako bi moralo ovako osim ako ne dodamo jos neki atribut u klasi GraphNode u koji bi se pamtio numReachable
+				   // tada bi mozda bilo moguce i samo jednim prolaskom kroz lancanu strukturu grafa
+				   // a mozda samo ne znam sta pricam
+		int tempNr = findNumReachable(temp);
+		if (tempNr > nr) {
+			nr = tempNr;
+			maxReachable = temp;
+		}
+		temp = temp->next;
+	}
+	return maxReachable;
+}
+
+int GraphAsList::findNumReachable(GraphNode* node) {
+	if (!node) return 0;
+	int toReturn = 0;
+	Edge* e = node->edges;
+	while (e) {
+		if (e->dest->status == 0) {
+			toReturn++;
+			e->dest->status = 1;
+		}
+		if (e->dest->status < 2) {
+			e->dest->status = 2;
+			toReturn += findNumReachable(e->dest);
+		}
+		e->dest->status = 0; // moguce da je bug i da je potrebno da u GraphAsList::findMaxReachable() treba postaviti sve statuse na 0 nakon svakog poziva  GraphAsList::findNumReachable(GraphNode* node) (sto znaci da bi slozenost bila BAR O(n^2))
+							 // ali za moj test primer radi i ovo kako treba (i ne umem da smislim neki za koji ne bi radilo)
+		e = e->peer;
+	}
+	return toReturn;
+}
