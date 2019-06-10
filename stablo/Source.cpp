@@ -43,27 +43,34 @@ int main() {
 	std::cout << std::endl;*/
 
 	BSTree* a = new BSTree();
-	a->insert(7);
+	/*a->insert(7);
 	a->insert(3);
 	a->insert(8);
 	a->insert(1);
 	a->insert(5);
 	a->insert(9);
 	a->insert(2);
-	a->insert(4);
-	//preorder> 7 3 1 2 5 6 8 9
-	/*a->insert(7);
+	a->insert(4);*/
+	//preorder> 7 3 1 2 5 4 8 9
+	a->insert(7);
 	a->insert(4);
 	a->insert(12);
 	a->insert(5);
 	a->insert(10);
 	a->insert(15);
-	a->insert(8);*/
+	a->insert(8);
 	a->preorder(a->root);
 	BSTNode* node = nullptr;
 	int longest = a->longestLeftPath(a->root, &node);
 	node->visit();
 	std::cout << longest << std::endl;
+
+	BSTNode* result;
+	int resultLevel;
+	a->topmostNoChildren(a->root, 0, &result, &resultLevel);
+	result->visit();
+	std::cout << std::endl << resultLevel << std::endl;
+
 
 	/*a->insert(10);
 	a->insert(11);

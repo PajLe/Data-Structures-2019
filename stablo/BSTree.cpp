@@ -93,3 +93,28 @@ int BSTree::longestLeftPath(BSTNode* root, BSTNode** start) {
 	}
 	return goRight;
 }
+
+void BSTree::topmostNoChildren(BSTNode* root, int level, BSTNode** result, int* resultLevel) {
+	if (!root) return;
+	if (root->isLeaf()) {
+		*result = root;
+		*resultLevel = level;
+		return;
+	}
+
+	int leftLevel = 0;
+	BSTNode* left = nullptr;
+	int rightLevel = 0;
+	BSTNode* right = nullptr;
+	topmostNoChildren(root->left, level + 1, &left, &leftLevel);
+	topmostNoChildren(root->right, level + 1, &right, &rightLevel);
+
+	if (left && leftLevel < rightLevel) {
+		*result = left;
+		*resultLevel = leftLevel;
+	}
+	else {
+		*result = right;
+		*resultLevel = rightLevel;
+	}
+}
