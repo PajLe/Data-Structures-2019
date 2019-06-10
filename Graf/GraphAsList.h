@@ -24,7 +24,7 @@ public:
 
 	std::vector<GraphNode*>* getReachable(int idAerodroma, int time); // SP_Kol_II_2016 zad: 3b
 	void dobiliLoptu(); // SP_Kol_II_2018 zad: 2b
-	GraphNode* findMaxReachable(); // SP_Kol_II_2018 zad: 3c
+	GraphNode* findMaxReachable(); // SP_Kol_II_2017 zad: 3c
 private:
 	void deleteEdge(GraphNode* sourceNode, Edge* prev, Edge* current);
 	void deleteExitingEdges(GraphNode* source);
