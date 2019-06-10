@@ -81,3 +81,15 @@ int BSTree::nodeHeight(BSTNode* node) { // vraca visinu cvora node u odnosu na n
 	int right = nodeHeight(node->right) + 1;
 	return (right > left) ? right : left;
 }
+
+int BSTree::longestLeftPath(BSTNode* root, BSTNode** start) {
+	if (!root) return 0;
+	int goLeft = longestLeftPath(root->left, start) + 1;
+	int goRight = longestLeftPath(root->right, start);
+
+	if(goLeft > goRight){
+		*start = root; 
+		return goLeft; 
+	}
+	return goRight;
+}

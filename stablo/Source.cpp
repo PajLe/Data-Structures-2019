@@ -26,7 +26,7 @@ int main() {
 	std::cout << std::endl;
 	delete b;*/
 
-	BSTree* c = new BSTree();
+	/*BSTree* c = new BSTree();
 	c->insert(50);
 	c->insert(17);
 	c->insert(72);
@@ -40,7 +40,7 @@ int main() {
 	c->insert(67);
 	//preorder> 50 17 12 9 14 23 19 72 54 67 76
 	c->preorder(c->root);
-	std::cout << std::endl;
+	std::cout << std::endl;*/
 
 	BSTree* a = new BSTree();
 	a->insert(7);
@@ -50,10 +50,22 @@ int main() {
 	a->insert(5);
 	a->insert(9);
 	a->insert(2);
-	a->insert(6);
+	a->insert(4);
 	//preorder> 7 3 1 2 5 6 8 9
-
+	/*a->insert(7);
+	a->insert(4);
+	a->insert(12);
+	a->insert(5);
 	a->insert(10);
+	a->insert(15);
+	a->insert(8);*/
+	a->preorder(a->root);
+	BSTNode* node = nullptr;
+	int longest = a->longestLeftPath(a->root, &node);
+	node->visit();
+	std::cout << longest << std::endl;
+
+	/*a->insert(10);
 	a->insert(11);
 	a->insert(12);
 	a->insert(13);
@@ -63,6 +75,7 @@ int main() {
 
 	std::cout << c->balanced() << std::endl;
 	std::cout << a->balanced() << std::endl;
+	
+	delete c;*/
 	delete a;
-	delete c;
 }

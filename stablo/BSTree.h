@@ -13,7 +13,7 @@ public:
 	// zadaci sa kolokvijuma:
 
 	bool balanced(); // SP_Kol_II_2018 zad: 1b
-
+	int longestLeftPath(BSTNode* root, BSTNode** start); // zadatak poslao neko u RII grupni chat
 private:
 	BSTNode* findPlaceToInsert(BSTNode* prev, BSTNode* temp, int key);
 	void deleteSubtree(BSTNode* node);
