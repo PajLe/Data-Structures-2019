@@ -253,6 +253,12 @@ void GraphAsList::dobiliLoptu() {
 }
 
 void GraphAsList::dfs(GraphNode* node) {
+	/* septembar 2019.
+	*	cilj obilaska grafa je, uglavnom, da svaki čvor bude posećen tačno jednom 
+	* 	ovaj dfs posećuje čvorove ulazniStepen(čvor) puta
+	*	samim tim ne bi trebalo da se primenjuje
+	*	jedinu svrhu ima kad uzimamo u obzir puteve kao u slučaju reachable funkcije
+	*/
 	if (!node) return;
 
 	Edge* e = node->edges;
